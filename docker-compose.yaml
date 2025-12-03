@@ -265,28 +265,20 @@ services:
       airflow-init:
         condition: service_completed_successfully
     networks: [lakehouse]
-
+    
   airflow-init:
     <<: *airflow-common
     container_name: airflow-init
-    user: "0:0"
+    user: "0:0"  # run as root to install packages
     entrypoint: /bin/bash
     command:
       - -c
       - |
         set -eu
         mkdir -p /opt/airflow/logs /opt/airflow/dags /opt/airflow/tasks /opt/airflow/plugins /opt/airflow/config
-        export PATH="/home/airflow/.local/bin:$PATH"
-        
-        # Install requirements if file exists and is not a directory
-        if [ -f /opt/airflow/requirements.txt ] && [ ! -d /opt/airflow/requirements.txt ]; then
-          echo "Installing Python packages from requirements.txt..."
-          pip install --no-cache-dir -r /opt/airflow/requirements.txt
-        else
-          echo "Warning: requirements.txt not found or is a directory. Installing default packages..."
-          pip install --no-cache-dir minio pandas requests configparser
-        fi
-        
+        # Install requirements globally
+        pip install --no-cache-dir --upgrade pip
+        pip install --no-cache-dir -r /opt/airflow/requirements.txt
         airflow db migrate
         airflow users create \
           --username "$$_AIRFLOW_WWW_USER_USERNAME" \
