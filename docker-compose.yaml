@@ -181,6 +181,9 @@ services:
         exec airflow api-server
     ports:
       - "8080:8080"
+    environment:
+      <<: *airflow-common-env
+      AIRFLOW__WEBSERVER__BASE_URL: http://localhost:8080   # <- add this
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/version"]
       interval: 30s
@@ -205,6 +208,9 @@ services:
           pip install --no-cache-dir -r /opt/airflow/requirements.txt
         fi
         exec airflow scheduler
+    environment:
+      <<: *airflow-common-env
+      AIRFLOW__WEBSERVER__BASE_URL: http://localhost:8080   # <- add this
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
       interval: 30s
@@ -229,6 +235,9 @@ services:
           pip install --no-cache-dir -r /opt/airflow/requirements.txt
         fi
         exec airflow dag-processor
+    environment:
+      <<: *airflow-common-env
+      AIRFLOW__WEBSERVER__BASE_URL: http://localhost:8080   # <- add this
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type DagProcessorJob --hostname "$${HOSTNAME}"']
       interval: 30s
