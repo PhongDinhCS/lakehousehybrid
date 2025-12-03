@@ -275,9 +275,9 @@ services:
       - |
         set -eu
         mkdir -p /opt/airflow/logs /opt/airflow/dags /opt/airflow/tasks /opt/airflow/plugins /opt/airflow/config
-        # Upgrade pip and install packages for airflow user
-        python -m pip install --upgrade --user pip
-        python -m pip install --user --no-cache-dir -r /opt/airflow/requirements.txt
+        # Upgrade pip and install packages as airflow user (no --user needed)
+        pip install --upgrade pip
+        pip install --no-cache-dir -r /opt/airflow/requirements.txt
         airflow db migrate
         airflow users create \
           --username "$$_AIRFLOW_WWW_USER_USERNAME" \
@@ -296,7 +296,6 @@ services:
     depends_on:
       <<: *airflow-common-depends-on
     networks: [lakehouse]
-
 
   airflow-cli:
     <<: *airflow-common
