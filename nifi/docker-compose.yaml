@@ -4,7 +4,7 @@ services:
   nifi:
     image: apache/nifi:1.19.1
     ports:
-      - "8080:8080"   # NiFi UI
+      - "18080:8080"   # NiFi UI
     volumes:
       - conf:/opt/nifi/current/conf
       - content:/opt/nifi/current/content_repository
