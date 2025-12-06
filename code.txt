@@ -10,3 +10,11 @@ trino-jdbc-478.jar
 ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker restart nifi-nifi-1
 nifi-nifi-1
 ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ 
+
+ubuntu2020@ubuntu2020-virtual-machine:~$ docker exec -it trino-coordinator bash
+trino@trino-coordinator:/$ ls
+bin  boot  data  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+trino@trino-coordinator:/$ rm -rf /tmp/delta/hyb_bronze
+trino@trino-coordinator:/$ ls -R /tmp/delta
+ls: cannot access '/tmp/delta': No such file or directory
+trino@trino-coordinator:/$ 
