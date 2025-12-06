@@ -23,3 +23,6 @@ trino@trino-coordinator:/$
 
 
 ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/nifi$ jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser
+
+docker logs delta-spark
+
