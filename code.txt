@@ -46,3 +46,11 @@ hadoop_conf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 hadoop_conf.set("fs.s3a.path.style.access", "true")
 hadoop_conf.set("fs.s3a.connection.ssl.enabled", "false")
 
+Spark: 4.0.0
+
+Hadoop: 3.4.1
+
+Delta Lake: 4.0.0 (delta-spark)
+
+JARs: hadoop-aws-3.4.1.jar and bundle-2.40.0.jar present
+
