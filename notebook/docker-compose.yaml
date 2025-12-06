@@ -1,0 +1,19 @@
+  jupyter:
+    image: jupyter/pyspark-notebook:latest
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      SPARK_HOME: "/usr/local/spark"
+      HADOOP_CONF_DIR: "/usr/local/spark/conf"
+      AWS_ACCESS_KEY_ID: admin
+      AWS_SECRET_ACCESS_KEY: password
+      S3_ENDPOINT: http://minio:9000
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    depends_on:
+      - delta-spark
+      - minio
+    networks:
+      - lakehouse
