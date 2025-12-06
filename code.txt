@@ -1,9 +1,11 @@
-/opt/nifi/nifi-current/lib/trino-jdbc-444.jar
-
-docker cp trino-jdbc-444.jar nifi-nifi-1:/opt/nifi/nifi-current/lib/
 https://repo1.maven.org/maven2/io/trino/trino-jdbc/478/
 ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker cp /home/ubuntu2020/Downloads/trino-jdbc-478.jar nifi-nifi-1:/opt/nifi/nifi-current/lib/
 Successfully copied 12.9MB to nifi-nifi-1:/opt/nifi/nifi-current/lib/
+
+ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker exec -it nifi-nifi-1 ls /opt/nifi/nifi-current/lib | grep trino
+ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker cp trino-jdbc-478.jar nifi-nifi-1:/opt/nifi/nifi-current/lib/
+Successfully copied 12.9MB to nifi-nifi-1:/opt/nifi/nifi-current/lib/
+
 ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker exec -it nifi-nifi-1 ls /opt/nifi/current/lib | grep trino
 ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker exec -it nifi-nifi-1 ls /opt/nifi/nifi-current/lib | grep trino
 trino-jdbc-478.jar
