@@ -44,3 +44,4 @@ volumes:
 networks:
   lakehouse:
     name: lakehouse
+    external: true
