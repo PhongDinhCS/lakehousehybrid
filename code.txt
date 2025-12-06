@@ -46,11 +46,15 @@ hadoop_conf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
 hadoop_conf.set("fs.s3a.path.style.access", "true")
 hadoop_conf.set("fs.s3a.connection.ssl.enabled", "false")
 
+spark.read.parquet("s3a://warehouse/fs/ecg_raw/day=20251206/").show()
+
 Spark: 4.0.0
 
 Hadoop: 3.4.1
 
-Delta Lake: 4.0.0 (delta-spark)
+Delta Lake: delta-spark_2.13-4.0.0.jar
 
 JARs: hadoop-aws-3.4.1.jar and bundle-2.40.0.jar present
+
+wget https://repo1.maven.org/maven2/io/delta/delta-spark_2.13/4.0.0/delta-spark_2.13-4.0.0.jar -P /home/ubuntu2020/.local/lib/python3.10/site-packages/pyspark/jars/
 
