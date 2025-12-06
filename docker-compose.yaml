@@ -126,6 +126,8 @@ services:
     container_name: delta-spark
     hostname: delta-spark
     command: [ "bash", "-lc", "sleep infinity" ]
+    ports:
+      - "8889:8889"
     environment:
       TZ: Asia/Ho_Chi_Minh
       AWS_ACCESS_KEY_ID: admin
