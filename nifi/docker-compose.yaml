@@ -16,6 +16,8 @@ services:
       - data:/opt/nifi/current/data
     networks:
       - lakehouse
+    environment:
+      SINGLE_USER_CREDENTIALS: "admin:admin"
 
   mosquitto:
     image: eclipse-mosquitto:2
