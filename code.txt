@@ -20,3 +20,6 @@ trino@trino-coordinator:/$ rm -rf /tmp/delta/hyb_bronze
 trino@trino-coordinator:/$ ls -R /tmp/delta
 ls: cannot access '/tmp/delta': No such file or directory
 trino@trino-coordinator:/$ 
+
+
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/nifi$ jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser
