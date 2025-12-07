@@ -58,3 +58,36 @@ JARs: hadoop-aws-3.4.1.jar and bundle-2.40.0.jar present
 
 wget https://repo1.maven.org/maven2/io/delta/delta-spark_2.13/4.0.0/delta-spark_2.13-4.0.0.jar -P /home/ubuntu2020/.local/lib/python3.10/site-packages/pyspark/jars/
 
+
+from pyspark.sql import SparkSession
+
+# =========================
+# Create a new SparkSession (Delta + Hive + MinIO)
+# =========================
+spark = SparkSession.builder \
+    .appName("Delta + S3 + Hive Full Config") \
+    .config("spark.jars.packages", "io.delta:delta-spark_2.13:4.0.0,org.apache.hadoop:hadoop-aws:3.4.1") \
+    .config("spark.hadoop.fs.s3a.endpoint", "http://127.0.0.1:9000") \
+    .config("spark.hadoop.fs.s3a.access.key", "admin") \
+    .config("spark.hadoop.fs.s3a.secret.key", "password") \
+    .config("spark.hadoop.fs.s3a.path.style.access", "true") \
+    .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+    .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false") \
+    .config("spark.sql.warehouse.dir", "s3a://warehouse/") \
+    .config("spark.sql.catalogImplementation", "hive") \
+    .config("spark.hadoop.hive.metastore.uris", "thrift://127.0.0.1:9083") \
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
+    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+    .enableHiveSupport() \
+    .getOrCreate()
+
+# =========================
+# Verify the session
+# =========================
+print("Spark version:", spark.version)
+print("Catalog implementation:", spark.conf.get("spark.sql.catalogImplementation"))
+print("Active session:", SparkSession.getActiveSession())
+
+spark.sql("SHOW DATABASES").show()
+
+
