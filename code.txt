@@ -90,4 +90,43 @@ print("Active session:", SparkSession.getActiveSession())
 
 spark.sql("SHOW DATABASES").show()
 
+docker exec -it delta-spark bash
+
+pyspark \
+  --master local[*] \
+  --packages io.delta:delta-spark_2.13:4.0.0,org.apache.hadoop:hadoop-aws:3.4.1 \
+  --conf spark.hadoop.fs.s3a.endpoint=http://minio:9000 \
+  --conf spark.hadoop.fs.s3a.access.key=admin \
+  --conf spark.hadoop.fs.s3a.secret.key=password \
+  --conf spark.hadoop.fs.s3a.path.style.access=true \
+  --conf spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem \
+  --conf spark.hadoop.fs.s3a.connection.ssl.enabled=false \
+  --conf spark.sql.warehouse.dir=s3a://warehouse/ \
+  --conf spark.sql.catalogImplementation=hive \
+  --conf spark.hadoop.hive.metastore.uris=thrift://hive-metastore:9083 \
+  --conf spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension \
+  --conf spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog
+
+
+spark.sql("SHOW TABLES IN hyb_bronze").show()
+spark.sql("""
+CREATE TABLE hyb_bronze.test_table (
+    id INT,
+    value STRING,
+    created_at BIGINT
+)
+USING DELTA
+LOCATION 's3a://warehouse/hyb_bronze.db/test_table'
+""")
+
+spark.sql("""
+INSERT INTO hyb_bronze.test_table
+VALUES
+  (1, 'alpha', 1733725000000),
+  (2, 'beta', 1733726000000)
+""")
+
+spark.sql("SELECT * FROM hyb_bronze.test_table").show()
+
+
 
