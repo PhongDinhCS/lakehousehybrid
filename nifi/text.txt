@@ -3,3 +3,13 @@ docker compose logs -f nifi
 Generated Username [b7aa3bdd-75f9-46c1-a42b-729d7b83db6c]
 Generated Password [qg7ZUi/4IF40oYaRNpwww8u0FiOKaoP9]
 
+{
+  "type": "record",
+  "name": "ecg_mqtt",
+  "fields": [
+    {"name": "timestamp", "type": "long"},
+    {"name": "device_name", "type": "string"},
+    {"name": "ecg", "type": "double"},
+    {"name": "annotation", "type": ["null", "string"], "default": null}
+  ]
+}
