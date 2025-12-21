@@ -142,6 +142,7 @@ docker network prune -f
 docker compose down --remove-orphans
 docker compose up -d
 
+ubuntu2020@ubuntu2020-virtual-machine:~/script_hybrid_lakehouse/lhhyb_spark$ docker exec -it delta-spark spark-submit   --master local[*]   --packages io.delta:delta-spark_2.13:4.0.0,org.apache.hadoop:hadoop-aws:3.4.1   /opt/create_delta_table.py
 
 
 
