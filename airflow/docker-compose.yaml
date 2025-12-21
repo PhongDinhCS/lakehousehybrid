@@ -30,7 +30,11 @@ services:
       - ./logs:/opt/airflow/logs
     ports:
       - "8080:8080"
-    command: ["bash", "/opt/airflow/docker-entrypoint.sh"]
+    command: >
+      bash -c "airflow db upgrade &&
+      airflow users create --username admin --firstname Admin --lastname User --password admin --role Admin --email admin@example.com || true &&
+      exec airflow webserver"
+
     networks:
       - lakehouse
 
