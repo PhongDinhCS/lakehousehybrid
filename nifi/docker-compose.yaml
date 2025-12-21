@@ -72,6 +72,8 @@ networks:
 #       - logs:/opt/nifi/nifi-current/logs
 #       - data:/opt/nifi/nifi-current/data
 #     restart: unless-stopped
+    # networks:
+    #   - lakehouse
 
 #   mosquitto:
 #     image: eclipse-mosquitto:2
@@ -83,6 +85,8 @@ networks:
 #       - mosquitto_data:/mosquitto/data
 #       - mosquitto_log:/mosquitto/log
 #     restart: unless-stopped
+    # networks:
+    #   - lakehouse
 
 # volumes:
 #   conf:
@@ -94,3 +98,9 @@ networks:
 #   data:
 #   mosquitto_data:
 #   mosquitto_log:
+
+
+# networks:
+#   lakehouse:
+#     name: lakehouse
+#     external: true
