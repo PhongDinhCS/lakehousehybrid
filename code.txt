@@ -1,3 +1,13 @@
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/airflow$ sudo chown -R 50000:50000 logs dags
+[sudo] password for ubuntu2020: 
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/airflow$ sudo chown -R 50000:50000 logs dags
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/airflow$ ls -ld logs dags
+drwxrwxr-x 3 50000 50000 4096 Thg 12 21 20:26 dags
+drwxrwxr-x 7 50000 50000 4096 Thg 12 21 21:16 logs
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/airflow$ 
+
+
+
 https://repo1.maven.org/maven2/io/trino/trino-jdbc/478/
 ubuntu2020@ubuntu2020-virtual-machine:~/Downloads$ docker cp /home/ubuntu2020/Downloads/trino-jdbc-478.jar nifi-nifi-1:/opt/nifi/nifi-current/lib/
 Successfully copied 12.9MB to nifi-nifi-1:/opt/nifi/nifi-current/lib/
