@@ -39,7 +39,7 @@ services:
                  --password admin \
                  --role Admin \
                  --email admin@example.com || true &&
-               airflow webserver"
+               exec airflow webserver"
     networks:
       - lakehouse
 
