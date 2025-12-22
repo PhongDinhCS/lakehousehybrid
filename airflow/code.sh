@@ -14,6 +14,9 @@ ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/airflow/dags$ pwd
 /home/ubuntu2020/lakehousehybrid/airflow/dags
 sudo chown -R ubuntu2020:ubuntu2020 .
 
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/spark/jobs$ pwd
+/home/ubuntu2020/lakehousehybrid/spark/jobs
+
 docker exec -it airflow-webserver airflow scheduler
 
 
