@@ -13,3 +13,23 @@ Generated Password [qg7ZUi/4IF40oYaRNpwww8u0FiOKaoP9]
     {"name": "annotation", "type": ["null", "string"], "default": null}
   ]
 }
+
+
+buntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/nifi$ docker exec -it nifi bash
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ ls
+assets  content_repository   docs                 lib      nar_extensions  provenance_repository  README
+bin     data                 extensions           LICENSE  nar_repository  python                 state
+conf    database_repository  flowfile_repository  logs     NOTICE          python_extensions      work
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ vi conf/nifi.properties
+bash: vi: command not found
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ sed -i 's/nifi.content.repository.archive.enabled=.*/nifi.content.repository.archive.enabled=false/' conf/nifi.properties
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ grep nifi.content.repository.archive.enabled conf/nifi.properties
+nifi.content.repository.archive.enabled=false
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ exit
+exit
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/nifi$ docker restart nifi
+nifi
+ubuntu2020@ubuntu2020-virtual-machine:~/lakehousehybrid/nifi$ docker exec -it nifi bash
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ rm -rf content_repository/archive/*
+nifi@550ec6d3f1cb:/opt/nifi/nifi-current$ exit
+exit
